@@ -1,0 +1,26 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-c-ares"
+VERSION=1.12.0
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Asynchronous resolver library for Win64 toolchain"
+DESCRIPTION="This is c-ares, an asynchronous resolver library.  It is intended
+for applications which need to perform DNS queries without blocking, or need to
+perform multiple DNS queries in parallel.  The primary examples of such
+applications are servers which communicate with multiple clients and programs
+with graphical user interfaces."
+HOMEPAGE="http://c-ares.haxx.se/"
+SRC_URI="http://c-ares.haxx.se/download/c-ares-${VERSION}.tar.gz"
+SRC_DIR="c-ares-${VERSION}"
+PATCH_URI="
+	http://pkgs.fedoraproject.org/cgit/rpms/c-ares.git/plain/0001-Use-RPM-compiler-options.patch
+"
+
+DIFF_EXCLUDES="ares_build.h"
+
+src_install() {
+	cd ${B}
+	cyginstall man_MANS=
+}
